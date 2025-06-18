@@ -1,0 +1,122 @@
+{% extends 'music/base.html' %}
+{% block title %}{{ artist.name }} | Hip Hop databáze{% endblock %}
+{% block content %}
+<div class="artist-detail">
+    <h2>{{ artist.name }}</h2>
+    
+    <div class="artist-info">
+        {% if artist.birth_date %}
+            <p><strong>Datum narození:</strong> {{ artist.birth_date|date:"d.m.Y" }}</p>
+        {% endif %}
+        {% if artist.country %}
+            <p><strong>Země původu:</strong> {{ artist.country }}</p>
+        {% endif %}
+        {% if artist.bio %}
+            <div class="bio">
+                <h3>Biografie</h3>
+                <p>{{ artist.bio }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="albums">
+        <h3>Alba</h3>
+        {% if artist.albums.all %}
+            <ul>
+                {% for album in artist.albums.all %}
+                    <li>
+                        <h4>{{ album.title }}</h4>
+                        <p><strong>Datum vydání:</strong> {{ album.release_date|date:"d.m.Y" }}</p>
+                        {% if album.description %}
+                            <p>{{ album.description }}</p>
+                        {% endif %}
+                        
+                        {% if album.songs.all %}
+                            <div class="songs">
+                                <h5>Skladby:</h5>
+                                <ul>
+                                    {% for song in album.songs.all %}
+                                        <li>
+                                            {{ song.track_number }}. {{ song.title }}
+                                            {% if song.duration %}
+                                                ({{ song.duration|time:"i:s" }})
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Zatím nejsou přidána žádná alba.</p>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .artist-detail {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .artist-info {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+    }
+    
+    .bio {
+        margin-top: 20px;
+    }
+    
+    .albums {
+        margin-top: 30px;
+    }
+    
+    .albums ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .albums li {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+    }
+    
+    .songs {
+        margin-top: 15px;
+        padding-left: 20px;
+    }
+    
+    .songs ul {
+        list-style: decimal;
+    }
+    
+    .songs li {
+        background: none;
+        padding: 5px 0;
+        margin: 0;
+        border-left: none;
+    }
+    
+    h3 {
+        color: #ffb347;
+        margin-top: 20px;
+    }
+    
+    h4 {
+        color: #ffb347;
+        margin: 0 0 10px 0;
+    }
+    
+    h5 {
+        color: #ffb347;
+        margin: 15px 0 10px 0;
+    }
+</style>
+{% endblock %} 

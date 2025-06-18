@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Hip Hop{% endblock %}</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #181818; /* Fallback background color */
+            background-image: url("{% static 'hiphop.jpg' %}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Optional: fixes background during scroll */
+            color: #fff;
+            margin: 0;
+        }
+        /* Optional: Add a semi-transparent overlay to improve text readability on the background image */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Mírně tmavší overlay */
+            z-index: -1; /* Place the overlay behind the content */
+        }
+        header, nav, main, footer { max-width: 900px; margin: 20px auto; position: relative; z-index: 1; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; backdrop-filter: blur(5px); }
+        header { background: rgba(34, 34, 34, 0.9); padding: 1em 0; text-align: center; border-bottom: none; margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        nav { background: rgba(17, 17, 17, 0.9); padding: 1em; text-align: center; margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom: none; }
+        nav a { color: #fff; margin: 0 1em; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+        nav a:hover { color: #ffb347; }
+        main { background: rgba(34, 34, 34, 0.9); padding: 2em; min-height: 60vh; border-top: none; margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+        /* Přidáme odsazení pod položky seznamu v hlavní sekci */
+        main ul {
+            list-style: none; /* Odstraníme výchozí odrážky */
+            padding: 0;
+        }
+        main ul li {
+            margin-bottom: 15px; /* Větší mezera */
+            padding: 10px; /* Vnitřní odsazení */
+            background: rgba(255, 255, 255, 0.05); /* Jemné pozadí pro položku */
+            border-radius: 5px; /* Zaoblené rohy */
+            border-left: 3px solid #ffb347; /* Barevný levý okraj */
+            transition: background 0.3s ease;
+        }
+         main ul li:hover {
+             background: rgba(255, 255, 255, 0.1); /* Změna pozadí při najetí */
+         }
+        /* Vycentrování h2 nadpisů v hlavní sekci */
+        main h2 {
+            text-align: center;
+            color: #ffb347;
+            margin-bottom: 30px;
+        }
+        /* Barva odkazů v hlavní sekci */
+        main p a {
+            color: #ff6347; /* Světle červená (Tomato) */
+            text-decoration: none; /* Odstraníme výchozí podtržení */
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+        main p a:hover {
+             color: #ff4500; /* Tmavší odstín při najetí myší */
+             text-decoration: underline; /* Zobrazíme podtržení při najetí */
+        }
+        /* Styly pro nadpisy v historii */
+        main h3 {
+            color: #ffb347;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        main hr {
+            border: none;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+        }
+
+        footer { background: rgba(17, 17, 17, 0.9); text-align: center; padding: 1em; font-size: 0.9em; color: #aaa; border-top: none; margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+
+        main ul li a {
+            color: #ffb347 !important; /* oranžová */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        main ul li a:visited {
+            color: #ffb347 !important; /* oranžová i po kliknutí */
+        }
+        main ul li a:hover {
+            color: #ff6347 !important; /* světle červená při najetí */
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hip Hop</h1>
+    </header>
+    <nav>
+        <a href="/">Úvod</a>
+        <a href="/zanry/">Žánry</a>
+        <a href="/historie/">Historie</a>
+        <a href="/umelci/">Umělci</a>
+        <a href="/formular/">Formulář</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; 2025 Ondřej Lampa
+    </footer>
+</body>
+</html> 

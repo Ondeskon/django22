@@ -1,0 +1,126 @@
+{% extends 'music/base.html' %}
+{% block title %}Umělci | Hip Hop databáze{% endblock %}
+{% block content %}
+<h2>Někteří hip hopoví umělci</h2>
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="add-artist-button">
+    <a href="{% url 'add_artist' %}" class="btn-add">+ Přidat nového umělce</a>
+</div>
+
+<ul>
+    {% for artist in artists %}
+        <li>
+            <div class="artist-item">
+                <div class="artist-info">
+                    <a href="{% url 'artist_detail' artist.id %}" class="artist-name">{{ artist.name }}</a>
+                    {% if artist.country %}<span class="artist-country">({{ artist.country }})</span>{% endif %}
+                </div>
+                <div class="artist-actions">
+                    <a href="{% url 'delete_artist' artist.id %}" class="btn-delete" onclick="return confirm('Opravdu chceš smazat umělce {{ artist.name }}?')">Smazat</a>
+                </div>
+            </div>
+        </li>
+    {% empty %}
+        <li>Zatím nejsou přidáni žádní umělci.</li>
+    {% endfor %}
+</ul>
+
+<style>
+.add-artist-button {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    display: inline-block;
+    background: #ffb347;
+    color: #181818;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-add:hover {
+    background: #ff6347;
+    color: white;
+}
+
+.artist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.artist-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.artist-name {
+    color: #ffb347 !important;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.artist-country {
+    color: #fff;
+    font-size: 1em;
+    opacity: 0.85;
+}
+
+.artist-actions {
+    margin-left: 15px;
+}
+
+.btn-delete {
+    background: #ff4444;
+    color: white;
+    padding: 5px 18px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: background 0.3s;
+    border: none;
+}
+
+.btn-delete:hover {
+    background: #cc0000;
+}
+
+.messages {
+    margin-bottom: 20px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.message.success {
+    background: #4CAF50;
+    color: white;
+}
+
+.message.error {
+    background: #f44336;
+    color: white;
+}
+</style>
+{% endblock %} 

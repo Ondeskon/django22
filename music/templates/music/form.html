@@ -1,0 +1,98 @@
+{% extends 'music/base.html' %}
+{% block title %}Formulář | Hip Hop{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2>Formulář</h2>
+    {% if success %}
+        <div class="success-message">Děkujeme za odeslání zprávy!</div>
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Jméno:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Zpráva:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit">Odeslat</button>
+    </form>
+    {% endif %}
+</div>
+
+<style>
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.07);
+    padding: 32px 28px 24px 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    text-align: center;
+}
+.form-container h2 {
+    color: #ffb347;
+    margin-bottom: 24px;
+    font-size: 2em;
+}
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #ffb347;
+    font-weight: bold;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ffb347;
+    border-radius: 6px;
+    background: rgba(34,34,34,0.85);
+    color: #fff;
+    font-size: 1em;
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff6347;
+    box-shadow: 0 0 0 2px #ffb34744;
+}
+button[type="submit"] {
+    background: linear-gradient(90deg, #ffb347 60%, #ff6347 100%);
+    color: #181818;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 32px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #ff6347 60%, #ffb347 100%);
+    color: #fff;
+}
+.success-message {
+    background: #ffb347;
+    color: #181818;
+    padding: 16px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+</style>
+{% endblock %} 
